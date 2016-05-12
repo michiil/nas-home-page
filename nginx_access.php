@@ -1,5 +1,5 @@
 <?php
-  $thisPage="home";
+  $thisPage="nginx_access";
 ?>
 
 <!DOCTYPE html>
@@ -13,12 +13,22 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <script type="text/javascript">
     $(document).ready(function(){
-
+      (function nginx_access() {
+        $.ajax({
+          url: 'ajax/nginx_access.php',
+          success: function(data) {
+            $('#nginx_access').html(data);
+          },
+          complete: function() {
+            setTimeout(nginx_access, 2000);
+          }
+        });
+      })();
     });
   </script>
 </head>
 <body>
   <?php include("include/menu.php"); ?>
-  Hallo..
+  <pre id="nginx_access"><font size="+1">Lade..</font></pre>
 </body>
 </html>

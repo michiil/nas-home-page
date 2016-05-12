@@ -1,5 +1,5 @@
 <?php
-  $thisPage="home";
+  $thisPage="syslog";
 ?>
 
 <!DOCTYPE html>
@@ -13,12 +13,22 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <script type="text/javascript">
     $(document).ready(function(){
-
+      (function syslog() {
+        $.ajax({
+          url: 'ajax/syslog.php',
+          success: function(data) {
+            $('#syslog').html(data);
+          },
+          complete: function() {
+            setTimeout(syslog, 2000);
+          }
+        });
+      })();
     });
   </script>
 </head>
 <body>
   <?php include("include/menu.php"); ?>
-  Hallo..
+  <pre id="syslog"><font size="+1">Lade..</font></pre>
 </body>
 </html>
